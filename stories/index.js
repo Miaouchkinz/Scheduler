@@ -61,7 +61,7 @@ storiesOf("DayList", module)
     <DayList days={days} day={"Monday"} setDay={action("setDay")} />
   ))
   .add("Tuesday", () => (
-    <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
+    <DayList days={days} day={"Tuesday"} setDay={event => action("setDay")(days.name)} />
   ));
 
 
@@ -95,7 +95,7 @@ storiesOf("InterviewerListItem", module)
       id={interviewer.id}
       name={interviewer.name}
       avatar={interviewer.avatar}
-      setInterviewer={action("setInterviewer")}
+      setInterviewer={event => action("setInterviewer")(interviewer.id)}
     />
   ));
 
