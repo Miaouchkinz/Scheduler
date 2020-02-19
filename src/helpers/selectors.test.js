@@ -1,7 +1,7 @@
 import { getAppointmentsForDay } from "helpers/selectors";
 
 const state = {
-  days: [
+  daysList: [
     {
       id: 1,
       name: "Monday",
@@ -46,8 +46,8 @@ test("getAppointmentsForDay returns an array containing the correct appointment 
   expect(second).toEqual(state.appointments["5"]);
 });
 
-test("getAppointmentsForDay returns an empty array when the days data is empty", () => {
-  const result = getAppointmentsForDay({ days: [] }, "Monday");
+test("getAppointmentsForDay returns an empty array when the daysList data is empty", () => {
+  const result = getAppointmentsForDay({ daysList: [] }, "Monday");
   expect(result.length).toEqual(0);
 });
 
