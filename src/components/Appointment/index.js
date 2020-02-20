@@ -35,8 +35,11 @@ export default function Appointment(props) {
     transition(CONFIRM);
   }
 
-  const onConfirm = () => {
+  const onConfirm = (interview) => {
+
     transition(DELETING);
+    props.cancelInterview(props.id, props.interview)
+      .then(() => onComplete());
   }
 
   const onComplete = () => {
@@ -66,11 +69,9 @@ export default function Appointment(props) {
         <Confirm
           onCancel={() => back()}
           onConfirm={onConfirm}
+          message={"Are you sure you would like to delete?"}
         />}
-       {mode === DELETING && 
-        <Status
-          onComplete={onComplete}
-        />}
+       {mode === DELETING && <Status/>}
     </article>
   );
 };
