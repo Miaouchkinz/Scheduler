@@ -15,6 +15,16 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  const save = (name, interviewer) => {
+    console.log('name', name)
+    console.log('interviewer', interviewer)
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.bookInterview("1", interview); // FIXME: ID is hardcorded at the mo.
+  }
+
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -29,6 +39,7 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={() => back()}
+          onSave={save}
         />
       )}
     </article>
