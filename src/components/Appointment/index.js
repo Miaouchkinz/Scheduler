@@ -3,12 +3,14 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
+import Status from "components/Appointment/Status"
 import { useVisualMode } from "hooks/useVisualMode";
 import "components/Appointment/styles.scss";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVING = "SAVING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -16,13 +18,14 @@ export default function Appointment(props) {
   );
 
   const save = (name, interviewer) => {
-    console.log('name', name)
-    console.log('interviewer', interviewer)
     const interview = {
       student: name,
       interviewer
     };
-    props.bookInterview("1", interview); // FIXME: ID is hardcorded at the mo.
+
+    transition(SAVING);
+    props.bookInterview(props.id, interview)
+      .then(() => transition(SHOW));
   }
 
   return (
@@ -42,6 +45,7 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
+      {mode === SAVING && <Status/>}
     </article>
   );
 };
