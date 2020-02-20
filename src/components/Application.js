@@ -9,10 +9,21 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     daysList: [],
-    appointments: {},
+    appointments: {
+      "1": {
+        id: 1,
+        time: "12pm",
+        interview: null
+      }
+    },
     interviewers: {}
   })
+  
   const setDay = day => setState({...state, day});
+
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+  }
 
   useEffect(() => {
     Promise.all([
@@ -52,9 +63,9 @@ export default function Application(props) {
             const interviewers = getInterviewersForDay(state, state.day)
               return (
                 appointment.id ?
-                <Appointment {...appointment} key={appointment.id} interview={interview} interviewers={interviewers}/>
+                <Appointment {...appointment} key={appointment.id} interview={interview} interviewers={interviewers} bookInterview={bookInterview}/>
                 : 
-                <Appointment time={props.time}/>
+                <Appointment time={props.time} interviewers={interviewers} bookInterview={bookInterview}/>
               );
 
             })}
