@@ -20,7 +20,7 @@ export default function Application(props) {
   })
   
   const setDay = day => setState({...state, day});
-
+  
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -40,6 +40,18 @@ export default function Application(props) {
       })
     })
 
+  }
+
+  const cancelInterview = (id, interview) => {
+    return Axios.delete(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then(() => {
+        const deletedAppointment = {...state.appointments}
+        deletedAppointment[id].interview = null;
+        setState({
+          ...state,
+          deletedAppointment
+        })
+      }) 
   }
 
   useEffect(() => {
@@ -81,7 +93,7 @@ export default function Application(props) {
             
               return (
                 appointment.id ?
-                <Appointment {...appointment} key={appointment.id} interview={interview} interviewers={interviewers} bookInterview={bookInterview}/>
+                <Appointment {...appointment} key={appointment.id} interview={interview} interviewers={interviewers} bookInterview={bookInterview} cancelInterview={cancelInterview}/>
                 :
                 <Appointment time={props.time} interviewers={interviewers} bookInterview={bookInterview}/>
               );
