@@ -13,6 +13,7 @@ const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
+const DELETING = "DELETING";
 
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
@@ -32,6 +33,14 @@ export default function Appointment(props) {
 
   const onDelete = () => {
     transition(CONFIRM);
+  }
+
+  const onConfirm = () => {
+    transition(DELETING);
+  }
+
+  const onComplete = () => {
+    transition(EMPTY)
   }
 
   return (
@@ -56,6 +65,11 @@ export default function Appointment(props) {
       {mode === CONFIRM && 
         <Confirm
           onCancel={() => back()}
+          onConfirm={onConfirm}
+        />}
+       {mode === DELETING && 
+        <Status
+          onComplete={onComplete}
         />}
     </article>
   );
