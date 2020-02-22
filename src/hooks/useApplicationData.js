@@ -41,7 +41,7 @@ const useApplicationData = () => {
           interviewers: all[2].data
         }});
     });
-  }, []);
+  }, [state.daysList]);
 
   return {  
     state,
