@@ -29,9 +29,9 @@ const useApplicationData = () => {
 
   useEffect(() => {
     Promise.all([
-      Promise.resolve(Axios.get(`http://localhost:8001/api/days`)),
-      Promise.resolve(Axios.get(`http://localhost:8001/api/appointments`)),
-      Promise.resolve(Axios.get(`http://localhost:8001/api/interviewers`)),
+      Axios.get(`http://localhost:8001/api/days`),
+      Axios.get(`http://localhost:8001/api/appointments`),
+      Axios.get(`http://localhost:8001/api/interviewers`),
     ]).then((all) => {
       dispatch({ 
         type: SET_APPLICATION_DATA, 
