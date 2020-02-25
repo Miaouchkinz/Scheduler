@@ -19,11 +19,15 @@ const reducer = (state, action) => {
         appointments: action.value.appointments,
         interviewers: action.value.interviewers
       }
+    // bookInterview function
     case ADD_INTERVIEW:
-      // bookInterview function
+    // case REMOVE_INTERVIEW:
+    case REMOVE_INTERVIEW:
+      const interviewValue = action.value.interview ? action.value.interview : null;
+      
       const appointment = {
         ...state.appointments[action.value.id],
-        interview: { ...action.value.interview }
+        interview: interviewValue ? { ...interviewValue } : null
       };
   
       const appointments = {
@@ -31,19 +35,22 @@ const reducer = (state, action) => {
         [action.value.id]: appointment
       };
 
+      // const getSpotsForDay = () => {
+      //   const unbooked = daysList[]
+      // }
+
       return {
         ...state,
         appointments
     }
-    case REMOVE_INTERVIEW:
-      // cancelInterview function
-      const deletedAppointment = {...state.appointments}
-      deletedAppointment[action.value.id].interview = null;
+    //   // cancelInterview function
+    //   const deletedAppointment = {...state.appointments}
+    //   deletedAppointment[action.value.id].interview = null;
 
-      return {
-        ...state,
-        deletedAppointment
-      }
+    //   return {
+    //     ...state,
+    //     deletedAppointment
+    //   }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
