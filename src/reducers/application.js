@@ -1,7 +1,6 @@
 export const SET_DAY = "SET_DAY";
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
-export const ADD_INTERVIEW = "ADD_INTERVIEW";
-export const REMOVE_INTERVIEW = "REMOVE_INTERVIEW";
+export const SET_INTERVIEW="SET_INTERVIEW";
 
 const reducer = (state, action) => {
 
@@ -19,10 +18,9 @@ const reducer = (state, action) => {
         appointments: action.value.appointments,
         interviewers: action.value.interviewers
       }
-    // bookInterview function
-    case ADD_INTERVIEW:
-    // case REMOVE_INTERVIEW:
-    case REMOVE_INTERVIEW:
+
+    case SET_INTERVIEW:
+      // bookInterview // cancelInterview functions
       const interviewValue = action.value.interview ? action.value.interview : null;
       
       const appointment = {
@@ -35,22 +33,20 @@ const reducer = (state, action) => {
         [action.value.id]: appointment
       };
 
-      // const getSpotsForDay = () => {
-      //   const unbooked = daysList[]
-      // }
+      const getSpotsForDay = () => {
+        const updatedDaysList = state.daysList.map((day) => {
+          const unbooked = day.appointments.filter(app => !appointments[app].interview)
+          day.spots = unbooked.length
+          return day
+        })
+        return updatedDaysList
+      }
 
       return {
         ...state,
+        daysList:getSpotsForDay(),
         appointments
     }
-    //   // cancelInterview function
-    //   const deletedAppointment = {...state.appointments}
-    //   deletedAppointment[action.value.id].interview = null;
-
-    //   return {
-    //     ...state,
-    //     deletedAppointment
-    //   }
       default:
         throw new Error(
           `Tried to reduce with unsupported action type: ${action.type}`
