@@ -3,24 +3,22 @@ export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 export const SET_INTERVIEW="SET_INTERVIEW";
 
 const reducer = (state, action) => {
-
   switch(action.type) {
     case SET_DAY:
       return {
         ...state,
         day: action.value
-      }
+      };
+    // When the scheduler API returns our requests with the application data
     case SET_APPLICATION_DATA:
-      // when our scheduler API returns our request with the application data
       return {
         ...state,
         daysList: action.value.daysList,
         appointments: action.value.appointments,
         interviewers: action.value.interviewers
-      }
-
+      };
+    // bookInterview and cancelInterview functions
     case SET_INTERVIEW:
-      // bookInterview // cancelInterview functions
       const interviewValue = action.value.interview ? action.value.interview : null;
       
       const appointment = {
@@ -38,20 +36,20 @@ const reducer = (state, action) => {
           const unbooked = day.appointments.filter(app => !appointments[app].interview)
           day.spots = unbooked.length
           return day
-        })
-        return updatedDaysList
-      }
+        });
+        return updatedDaysList;
+      };
 
       return {
         ...state,
         daysList:getSpotsForDay(),
         appointments
-    }
-      default:
-        throw new Error(
-          `Tried to reduce with unsupported action type: ${action.type}`
-        );
-    }
-}
+    };
+    default:
+      throw new Error(
+        `Tried to reduce with unsupported action type: ${action.type}`
+      );
+    };
+};
 
 export default reducer;
