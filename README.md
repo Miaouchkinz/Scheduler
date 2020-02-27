@@ -10,9 +10,11 @@ A single-page React application that allows users to book and cancel interviews.
 ## Final Product
 
 Application Walkthrough
+
 ![App_Walkthrough](https://user-images.githubusercontent.com/8763915/75412823-b7121680-58f1-11ea-97bc-27551f803844.gif)
 
 Axios error handling
+
 ![Axios_Error_Handling](https://user-images.githubusercontent.com/8763915/75412821-b5e0e980-58f1-11ea-9a59-049a931d880a.gif)
 
 ## Dependencies
