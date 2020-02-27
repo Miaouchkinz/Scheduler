@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer} from "react";
-import reducer, { SET_DAY, SET_APPLICATION_DATA, SET_INTERVIEW } from "../reducers/application"
+import reducer, { SET_DAY, SET_APPLICATION_DATA, SET_INTERVIEW } from "../reducers/application";
 import Axios from "axios";
 
 const useApplicationData = () => {
@@ -8,7 +8,7 @@ const useApplicationData = () => {
     daysList: [],
     appointments: {},
     interviewers: {}
-  })
+  });
   
   const setDay = day => dispatch({type: SET_DAY, value: day});
   
@@ -17,14 +17,14 @@ const useApplicationData = () => {
       .then(() => {
         dispatch({type: SET_INTERVIEW, value: {id, interview}})
         });
-  }
+  };
 
   const cancelInterview = (id, interview) => {
     return Axios.delete(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {
         dispatch({type: SET_INTERVIEW, value: {id, interview: null}})
         });
-  }
+  };
 
   useEffect(() => {
     Promise.all([
@@ -47,7 +47,7 @@ const useApplicationData = () => {
     setDay,
     bookInterview,
     cancelInterview
-  }
-}
+  };
+};
 
 export default useApplicationData;
