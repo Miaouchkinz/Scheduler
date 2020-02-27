@@ -23,6 +23,16 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+  
+  //+++++++++++++++++++++++++++++++++  
+  //+ VIEWMODE TRANSITION FUNCTIONS +
+  //+++++++++++++++++++++++++++++++++
+  const onConfirm = (interview) => {
+    transition(DELETING, true);
+    props.cancelInterview(props.id, props.interview)
+      .then(() => onComplete())
+      .catch(error => transition(ERROR_DELETE, true));
+  };
 
   const save = (name, interviewer) => {
     const interview = {
@@ -34,27 +44,19 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
-  }
+  };
 
   const onDelete = () => {
     transition(CONFIRM);
-  }
-
-  const onConfirm = (interview) => {
-
-    transition(DELETING, true);
-    props.cancelInterview(props.id, props.interview)
-      .then(() => onComplete())
-      .catch(error => transition(ERROR_DELETE, true));
-  }
+  };
 
   const onComplete = () => {
-    transition(EMPTY)
-  }
+    transition(EMPTY);
+  };
 
   const onEdit = () => {
     transition(EDIT);
-  }
+  };
 
   return (
     <article className="appointment" data-testid="appointment">
