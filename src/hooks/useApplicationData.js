@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer} from "react";
+import { useEffect, useReducer} from "react";
 import reducer, { SET_DAY, SET_APPLICATION_DATA, SET_INTERVIEW } from "../reducers/application";
 import Axios from "axios";
 
