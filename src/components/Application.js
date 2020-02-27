@@ -21,7 +21,7 @@ export default function Application(props) {
           src="images/logo.png"
           alt="Interview Scheduler"
         />
-        <hr className="sidebar__separator sidebar--centered" />
+        <hr className="sidebar__separator sidebar--centered"/>
         <nav className="sidebar__menu">
           <DayList
             daysList={state.daysList}
@@ -42,14 +42,20 @@ export default function Application(props) {
             
               return (
                 appointment.id ?
-                <Appointment {...appointment} key={appointment.id} interview={interview} interviewers={interviewers} bookInterview={bookInterview} cancelInterview={cancelInterview}/>
+                <Appointment 
+                  {...appointment} 
+                  key={appointment.id} 
+                  interview={interview} 
+                  interviewers={interviewers} 
+                  bookInterview={bookInterview} 
+                  cancelInterview={cancelInterview}
+                />
                 :
                 <Appointment time={props.time} interviewers={interviewers} bookInterview={bookInterview}/>
               );
-
             })}
           <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
-}
+};
