@@ -4,7 +4,6 @@ import "components/InterviewerList.scss"
 import { PropTypes } from "prop-types";
 
 export default function InterviewerList(props) {
-
   const interviewers = props.interviewers.map(interviewer => {
     return (
       <InterviewerListItem
@@ -14,8 +13,8 @@ export default function InterviewerList(props) {
         selected={props.selectedInterviewer && interviewer.id === props.selectedInterviewer.id}
         setInterviewer={(event) => props.setInterviewer(interviewer)}
       />
-    )
-  })
+    );
+  });
 
   return (
     <section className="interviewers">
@@ -27,6 +26,9 @@ export default function InterviewerList(props) {
   );
 };
 
+//++++++++++++++++++ 
+//+ PROPTYPE TESTS +
+//++++++++++++++++++
 InterviewerList.propTypes = {
   selectedInterviewer: PropTypes.object,
   setInterviewer: PropTypes.func.isRequired
